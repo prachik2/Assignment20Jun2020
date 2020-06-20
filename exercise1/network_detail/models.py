@@ -8,10 +8,10 @@ class NetworkDetailsQuerySet(BaseQuerySet):
 
 
 class NetworkDetails(BaseModel):
-    sap_id = models.CharField(max_length=18, blank=True, null=True)
-    loop_back = models.CharField(max_length=15, blank=True, null=True)
+    sap_id = models.CharField(max_length=18, unique=True)
+    loop_back = models.CharField(max_length=15, unique=True)
     mac_address = models.CharField(max_length=17, unique=True)
-    host_name = models.CharField(max_length=15, blank=True, null=True)
+    host_name = models.CharField(max_length=15, unique=True)
 
     objects = NetworkDetailsQuerySet.as_manager()
 
