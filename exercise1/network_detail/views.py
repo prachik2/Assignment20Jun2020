@@ -9,10 +9,10 @@ from .models import NetworkDetails
 
 
 class NetworkDetailCreateView(BaseCreateView):
+    model = NetworkDetails
     form_class = NetworkDetailForm
     template_name = 'network_details/create_network_detail.html'
     success_url = '/network_details'
-    model = NetworkDetails
 
 
 class NetworkDetailEditView(BaseEditView):

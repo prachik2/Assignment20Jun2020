@@ -53,26 +53,39 @@ class NetworkDetailForm(forms.ModelForm):
 
         }
 
-    def save(self, commit=True):
-        """Method overridden to abstract user creation when creating staff.
+    def clean_mac_address(self):
+        """Method to clean the mac_address name.
 
-            This method is overridden to abstract the creation of a new User
-            when a Staff object is created. Thus the developer is not required
-            to create a separate User instance and add a relationship to the
-            new Staff object. This also avoids the possibility of incorrect usage
-            of the staff model.
+            Here we check if the entered Mac Address is valid or not.
+
+        :return: cleaned_data, used in the views to further perform any validation and later
+        used by save method.
+        :rtype: dictionary
+        """
+        # Calling clean() method of super class
+        cleaned_data = super(NetworkDetailForm, self).clean()
+        if "first_name" in cleaned_data.keys():
+            if cleaned_data['mac_address'].isalpha():
+                cleaned_data['mac_address'] = str(cleaned_data['mac_address'])
+            else:
+                raise forms.ValidationError("mac_address should not contain special characters or numbers.")
+        return cleaned_data['mac_address']
+
+    def save(self, commit=True):
+        """Method overridden to abstract network details creation .
+
+            This method is overridden to abstract the creation of a new record
+            when a network detail object is created.
 
         :param commit: used to assert whether to commit to DB right away of merely instantiate the object.
         :type boolean:
-        :return: Staff object that has all the required values.
-        :rtype: Staff
+        :return: NetworkDetail object that has all the required values.
+        :rtype: NetworkDetails
         """
-        data = super(StaffForm, self).save(commit=False)
-
-        user = User.objects.create_user(username=data.email.split('@')[0],
-                                        email=data.email,
-                                        password=self.cleaned_data['password_1'])
-        data.user = user
+        # data = super(NetworkDetailForm, self).save(commit=False)
+        # Calling clean() method of super class
+        cleaned_data = super(NetworkDetailForm, self).clean()
+        print(cleaned_data,"-------------")
         if commit:
-            data.save()
-        return data
+            cleaned_data.save()
+        return cleaned_data

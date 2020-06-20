@@ -13,6 +13,7 @@ class AjaxableResponseMixin(object):
     """
 
     def form_invalid(self, form):
+        print("Called")
         response = super(AjaxableResponseMixin, self).form_invalid(form)
         response_data = {
             'status': 'false',
@@ -38,7 +39,6 @@ class AjaxableResponseMixin(object):
             'message': '{} {} successfully.'.format(form.instance.__class__.__name__, self.action_message),
         }
         if self.request.is_ajax():
-
             return JsonResponse(response_data)
         else:
             return response
@@ -48,6 +48,7 @@ class BaseCreateView(AjaxableResponseMixin, CreateView):
     action_message = 'created'
 
     def form_valid(self, form):
+        print("form")
         form.instance.creator = self.request.user
         form.instance.updater = self.request.user
 

@@ -25,7 +25,6 @@ class NetworkDetails(BaseModel):
         else:
             return "{}".format(self.mac_address)
 
-    def remove(self):
-        self.deactivate()
-        self.is_deleted = True
-        self.save()
+    def save(self, *args, **kwargs):
+        self.mac_address = self.mac_address
+        super(NetworkDetails, self).save(*args, **kwargs)
