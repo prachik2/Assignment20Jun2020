@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Network Details</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% load static %}
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href=" {%  static 'images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href=" {%  static 'vendor/bootstrap/css/bootstrap.min.css' %} ">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href=" {%  static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href=" {%  static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href=" {%  static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href=" {%  static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href=" {%  static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href=" {%  static 'css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+			<a href="{% url 'network_detail:create_network_details' %}"><button type="button" class="btn btn-primary" >Create</button></a>
+
+				<div class="table100 ver1 m-b-110">
+
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">Mac Address</th>
+									<th class="cell100 column2">Loop Back</th>
+									<th class="cell100 column3">Sap ID</th>
+									<th class="cell100 column4">Host Name</th>
+									<th class="cell100 column5">Action</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+						   <tbody>
+								{% for detail in details %}
+							   <tr>
+								   <td>{{detail.loop_back}}</td>
+								   <td>{{detail.mac_address}}</td>
+								   <td>{{detail.sap_id}}</td>
+								   <td>{{detail.host_name}}</td>
+								   <td>
+									   <a href="{% url 'network_detail:edit_network_details' pk=detail.auto_id %}">
+										<button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
+									   </a>
+										<a data-id="{{detail.auto_id}}" href="{% url 'network_detail:delete_network_details' pk=detail.auto_id %}" >
+								       <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+										</a>
+								   </td>
+							   </tr>
+								{% endfor %}
+						   </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<!--===============================================================================================-->	
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src=" {% static 'vendor/bootstrap/js/popper.js'  %}"></script>
+	<script src=" {% static 'vendor/bootstrap/js/bootstrap.min.js'  %}"></script>
+<!--===============================================================================================-->
+	<script src=" {% static 'vendor/select2/select2.min.js'  %}"></script>
+<!--===============================================================================================-->
+	<script src=" {% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js'  %}"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+			
+		
+	</script>
+<!--===============================================================================================-->
+	<script src=" {% static 'js/main.js' %}"></script>
+
+</body>
+</html>
