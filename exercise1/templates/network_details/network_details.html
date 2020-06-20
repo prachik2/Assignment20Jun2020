@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <title>Bootstrap Example</title>
+ <title>Network Details</title>
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -33,45 +33,24 @@
        <table class="table table-borded table-responsive table-striped " id="table-list">
            <thead class="table-dark">
                <tr>
-                   <td>Name</td>
-                   <td>Gental</td>
-                   <td>eMail</td>
+                   <td>LoopBack</td>
+                   <td>Mac Address</td>
+                   <td>Sap Id</td>
+                   <td>Host Id</td>
                </tr>
            </thead>
            <tbody>
+                {% for detail in details %}
                <tr>
-                   <td>James</td>
-                   <td>Male</td>
-                   <td>jhsdfgh@hotmail.com</td>
+                   <td>{{detail.loop_back}}</td>
+                   <td>{{detail.mac_address}}</td>
+                   <td>{{detail.sap_id}}</td>
+                   <td>{{detail.host_name}}</td>
                </tr>
-               <tr>
-                   <td>Sams</td>
-                   <td>Male</td>
-                   <td>hhfdfg@hotmail.com</td>
-               </tr>
-               <tr>
-                   <td>Mary</td>
-                   <td>Female</td>
-                   <td>vccch@gmail.com</td>
-               </tr>
-               <tr>
-                   <td>Ashly</td>
-                   <td>Female</td>
-                   <td>asss@gmail.com</td>
-               </tr>
-               <tr>
-                   <td>Eden</td>
-                   <td>Male</td>
-                   <td>edd@hotmail.com</td>
-               </tr>
-               <tr>
-                   <td>Daisy</td>
-                   <td>Female</td>
-                   <td>hhdf@gmail.com</td>
-               </tr>
+                {% endfor %}
            </tbody>
        </table>
-       <button class="btn btn-info" id="add"><span class="glyphicon glyphicon-plus-sign"></span>Add New Members</button>
+       <button class="btn btn-info" id="add"><span class="glyphicon glyphicon-plus-sign"></span>Create</button>
    </div>
 </body>
 <script>

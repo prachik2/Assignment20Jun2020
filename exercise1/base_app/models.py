@@ -9,6 +9,7 @@
 import uuid
 
 from django.db import models, IntegrityError
+from django.urls import reverse
 from django.utils import timezone
 
 
@@ -59,7 +60,7 @@ class BaseModel(models.Model):
         to with  in the base model.
     """
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4().hex, editable=False)
     auto_id = models.PositiveIntegerField(db_index=True, unique=True)
     creator = models.ForeignKey('auth.User', blank=True, related_name='creator_%(class)s_objects',
                                 on_delete=models.PROTECT)
@@ -71,6 +72,10 @@ class BaseModel(models.Model):
     is_deleted = models.BooleanField(default=False)
 
     objects = BaseQuerySet.as_manager()
+
+    def __str__(self):
+        return self.id
+
 
     class Meta:
         abstract = True

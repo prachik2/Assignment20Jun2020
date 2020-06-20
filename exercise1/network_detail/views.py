@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from django.shortcuts import render
 
@@ -24,19 +25,40 @@ class NetworkDetailEditView(BaseEditView):
 class NetworkDetailListView(BaseListView):
     model = NetworkDetails
     template_name = 'network_details/network_details.html'
+    success_url = '/network_details'
 
     def get_queryset(self):
         queryset = super(NetworkDetailListView, self).get_queryset()
-        return queryset
-        # if self.request.GET.get('q'):
-        #     query_text = self.request.GET.get('q')
-        #     return queryset.filter(
-        #         Q(auto_id__icontains=query_text) | Q(loop_back__icontains=query_text) | Q(
-        #             host_name__icontains=query_text) | Q(
-        #             mac_address__icontains=query_text) | Q(phone__icontains=query_text) | Q(
-        #             sap_id__icontains=query_text)).select_related('user').only('pk', 'auto_id', 'user__username', 'first_name', 'last_name', 'email', 'phone', 'department')
-        # else:
-        #     return queryset.select_related('user').only('pk', 'auto_id', 'first_name', 'user__username', 'last_name', 'email', 'phone', 'department', 'user__is_active')
+        try:
+           queryset = NetworkDetails.objects.all()
+
+        except ObjectDoesNotExist:
+            pass
+
+        return queryset.order_by('mac_address').filter(is_deleted=False)
+
+    def get_context_data(self, **kwargs):
+        context = {
+
+            'title': "Network Details",
+            'panel_title': 'Local Networks',
+            'details': self.get_queryset(),
+        }
+        return context
+
+    # def get_queryset(self):
+    #     queryset = super(NetworkDetailListView, self).get_queryset()
+    #     if self.request.GET.get('q'):
+    #         query_text = self.request.GET.get('q')
+    #         print(queryset,"--------")
+    #         return queryset.filter(
+    #             Q(auto_id__icontains=query_text) |
+    #             Q(loop_back__icontains=query_text) |
+    #             Q(host_name__icontains=query_text) |
+    #             Q(mac_address__icontains=query_text)  |
+    #             Q(sap_id__icontains=query_text)).select_related('mac_address').only('pk', 'auto_id')
+    #     else:
+    #         return queryset.select_related('mac_address').only('pk', 'auto_id', 'sap_id', 'mac_address', 'loop_back', 'host_name')
 
 
 class NetworkDetailDeleteView(BaseDeleteView):

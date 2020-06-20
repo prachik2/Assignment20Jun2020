@@ -6,7 +6,7 @@ import struct
 import socket
 
 from datetime import datetime
-from exercise1.exercise1.settings import DATABASES
+from exercise1.settings import DATABASES
 
 now = datetime.now()
 dbconn = MySQLdb.connect(
@@ -68,7 +68,7 @@ def insert_data():
                                                                                     values (%s,%s,%s,%s,%s,%s,\
                                                                                     %s,%s,%s,%s,%s) ;",
                            (
-                           [uuid.uuid1(), 1, 1, 0, now.strftime("%Y-%m-%d %H:%M:%S"), now.strftime("%Y-%m-%d %H:%M:%S"),
+                           [uuid.uuid1().hex, 1, 1, 0, now.strftime("%Y-%m-%d %H:%M:%S"), now.strftime("%Y-%m-%d %H:%M:%S"),
                             i, sap_ids[i], socket.inet_ntoa(struct.pack('>I', random.randint(1, 0xffffffff))), socket.inet_ntoa(struct.pack('<I',random.randint(1, 0xffffffff))),mac_address[i]]))
             dbconn.commit()
 
@@ -76,4 +76,4 @@ def insert_data():
 if __name__ == "__main__":
     n_unique = int(input("Enter No. of records to be inserted:(1...n)"))
     insert_data()
-    print(insert_data(), "Inserted.")
+    print("Inserted.")
