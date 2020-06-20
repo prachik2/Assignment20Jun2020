@@ -1,10 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+	<title>Network Details</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% load static %}
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href=" {%  static 'images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href=" {%  static 'vendor/bootstrap/css/bootstrap.min.css' %} ">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href=" {%  static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href=" {%  static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href=" {%  static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href=" {%  static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href=" {%  static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href=" {%  static 'css/main.css' %}">
+<!--===============================================================================================-->
 </head>
 <body>
+
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100 ver1 m-b-110">
+					<div class="table100-body js-pscroll">
+                        <form class="border border-light p-5">
+
+                            <p class="h4 mb-4 text-center">Create</p>
+
+                            <label for="host_id">Host Id</label>
+                            <input type="text" id="host_id" class="form-control mb-4" placeholder="255.15.255.00">
+
+                            <label for="mac_address">Mac Address</label>
+                            <input type="text" id="mac_address" class="form-control mb-4" placeholder="00:00:00:1b:15:45">
+
+                            <label for="sap_id">Sap Id</label>
+                            <input type="text" id="sap_id" class="form-control mb-4" placeholder="S124578457845">
+
+                            <label for="loop_back_text">Loop Back</label>
+                            <input type="text" id="loop_back_text" class="form-control mb-4" placeholder="127.0.0.1">
+
+
+                            <button class="btn btn-info btn-block" type="submit">Submit</button>
+
+
+                        </form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src=" {% static 'vendor/bootstrap/js/popper.js'  %}"></script>
+	<script src=" {% static 'vendor/bootstrap/js/bootstrap.min.js'  %}"></script>
+<!--===============================================================================================-->
+	<script src=" {% static 'vendor/select2/select2.min.js'  %}"></script>
+<!--===============================================================================================-->
+	<script src=" {% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js'  %}"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+
+
+	</script>
+<!--===============================================================================================-->
+	<script src=" {% static 'js/main.js' %}"></script>
 
 </body>
 </html>

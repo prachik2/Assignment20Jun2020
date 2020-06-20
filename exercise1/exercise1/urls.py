@@ -20,7 +20,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('static/<path:path>/', serve, {'document_root': settings.STATIC_ROOT, }),
+    path('static/<path:path>/', serve, {'document_root': settings.STATIC_FILE_ROOT, }),
     path('network_details/',include('network_detail.urls', namespace='network_detail')),
 
 ]

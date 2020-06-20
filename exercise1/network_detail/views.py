@@ -24,7 +24,7 @@ class NetworkDetailEditView(BaseEditView):
 
 class NetworkDetailListView(BaseListView):
     model = NetworkDetails
-    template_name = 'network_details/network_details.html'
+    template_name = 'network_details/network_lists_detail.html'
     success_url = '/network_details'
 
     def get_queryset(self):
